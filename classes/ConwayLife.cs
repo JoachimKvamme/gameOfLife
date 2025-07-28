@@ -8,45 +8,35 @@ namespace csharp_codewars2.Classes
     public class ConwayLifeKata
     {
 
-        List<List<int>> matrix =
-        [[0, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 0, 0,]];
+        public int[,] matrix =
+        {{0, 0, 0, 0},
+        {0, 1, 1, 0},
+        {0, 1, 0, 0},
+        {0, 0, 0, 0,} };
 
-        public int[,] ConwayLife(int[,] cells, int generation)
+        public int[,] ConwayLife(int[,] cellArray, int generation)
         {
 
             int count = 0;
+            
+            List<List<int>> cells = Enumerable.Range(0, cellArray.GetLength(0))
+                    .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
+                    .Select(col => cellArray[row, col]).ToList())
+                    .ToList();
 
-            // Loops trough the original matrix
-            for (int row = 0; row < cells.GetLength(0); row++)
+            string showMatrix = "";
+            foreach (var item in cells)
             {
-                for (int col = 0; col < cells.GetLength(1); col++)
+                foreach (var cell in item)
                 {
-                    // Checks for live cells, then loops through the surrounding cells.
-                    if (cells[row, col] == 1)
-                    {
-                        for (int i = row - 1; i < row + 1; i++)
-                        {
-                            for (int x = col - 1; i < row + 1; i++)
-                            {
-                                if (cells[i, x] == 1 && (i, x) != (row, col))
-                                {
-                                    count += 1;
-                                    Console.WriteLine(count);
-                                }
-
-                            }
-
-                        }
-                        Console.WriteLine("The live cell on coordinates " + row + " " + col + " has " + count + " neighbours.");
-                    }
+                    showMatrix += " " + cell;
                 }
+                showMatrix += "\n";
             }
 
+            Console.WriteLine(showMatrix);
 
-            return cells;
+            return cellArray;
         }
 
         
