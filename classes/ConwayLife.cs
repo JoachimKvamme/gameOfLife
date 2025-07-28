@@ -14,20 +14,39 @@ namespace csharp_codewars2.Classes
         [0, 1, 0, 0],
         [0, 0, 0, 0,]];
 
-        public List<List<int>> ConwayLife(List<List<int>> matrix)
+        public int[,] ConwayLife(int[,] cells, int generation)
         {
-            for (int row = 0; row < matrix.Count(); row++)
+
+            int count = 0;
+
+            // Loops trough the original matrix
+            for (int row = 0; row < cells.GetLength(0); row++)
             {
-                for (int field = 0; field < matrix[row].Count(); field++)
+                for (int col = 0; col < cells.GetLength(1); col++)
                 {
-                    if (matrix[row][field] == 1)
+                    // Checks for live cells, then loops through the surrounding cells.
+                    if (cells[row, col] == 1)
                     {
-                        
+                        for (int i = row - 1; i < row + 1; i++)
+                        {
+                            for (int x = col - 1; i < row + 1; i++)
+                            {
+                                if (cells[i, x] == 1 && (i, x) != (row, col))
+                                {
+                                    count += 1;
+                                    Console.WriteLine(count);
+                                }
+
+                            }
+
+                        }
+                        Console.WriteLine("The live cell on coordinates " + row + " " + col + " has " + count + " neighbours.");
                     }
                 }
             }
 
-            return [[]];
+
+            return cells;
         }
 
         
