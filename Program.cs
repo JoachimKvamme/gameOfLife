@@ -14,35 +14,18 @@ class Program
         List<List<int>> ints =
         [[0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
         [0, 1, 0, 0, 1, 1, 0, 0, 0, 0]];
-        int firstIndex = ints[0].Count() -1;
-        int lastIndex = ints[0].Count() - 1;
-        foreach (var list in ints)
-        {
-            if (list.IndexOf(1) < firstIndex)
-            {
-                firstIndex = list.IndexOf(1);
-            }
-            if (list.LastIndexOf(1) < lastIndex)
-            {
-                lastIndex = list.LastIndexOf(1);
-            }
+        List<List<int>> ints2 =
+        [[0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 0, 0, 1, 0]];
+        List<List<int>> ints3 =
+        [[0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+        [1, 0, 0, 0, 1, 1, 0, 0, 0, 0]];
 
-        }
-        Console.WriteLine(firstIndex);
-        Console.WriteLine(lastIndex);
+        gameOfLife.TrimList(ints);
+        gameOfLife.TrimList(ints2);
+        gameOfLife.TrimList(ints3);
+
         
-
-        string showints = "";
-        foreach (var item in ints)
-        {
-            foreach (var cell in item)
-            {
-                showints += cell;
-            }
-            showints += "\n";
-        }
-
-        Console.WriteLine(showints);
 
     }
 }
