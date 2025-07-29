@@ -44,18 +44,19 @@ namespace csharp_codewars2.Classes
         {
 
             List<List<int>> croppedList = new List<List<int>>();
-        int firstIndex = listToTrim[0].Count() -1;
-        int lastIndex = listToTrim[0].Count() - 1;
-        foreach (var list in listToTrim)
-        {
-            if (list.IndexOf(1) < firstIndex)
+            int firstIndex = listToTrim[0].Count() -1;
+            int lastIndex = 0;
+            foreach (var list in listToTrim)
             {
-                firstIndex = list.IndexOf(1);
-            }
-            if (list.LastIndexOf(1) < lastIndex)
-            {
-                lastIndex = list.LastIndexOf(1);
-            }
+
+                if (list.IndexOf(1) < firstIndex)
+                {
+                    firstIndex = list.IndexOf(1);
+                }
+                if (list.LastIndexOf(1) > lastIndex)
+                {
+                    lastIndex = list.LastIndexOf(1);
+                }
 
         }
         Console.WriteLine(firstIndex);
