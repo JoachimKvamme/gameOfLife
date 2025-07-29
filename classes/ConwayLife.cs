@@ -18,11 +18,16 @@ namespace csharp_codewars2.Classes
         {
 
             int count = 0;
-            
+
             List<List<int>> cells = Enumerable.Range(0, cellArray.GetLength(0))
                     .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
                     .Select(col => cellArray[row, col]).ToList())
                     .ToList();
+
+            for (int row = 0; row < cells.Count; row++)
+            {
+
+            }
 
             string showMatrix = "";
             foreach (var item in cells)
@@ -39,12 +44,34 @@ namespace csharp_codewars2.Classes
             return cellArray;
         }
 
+        public List<List<int>> ExpandList(List<List<int>> listToGrow)
+        {
+            List<int> newRow = new List<int>();
+            foreach (var row in listToGrow)
+            {
+                row.Add(0);
+                row.Insert(0, 0);
+
+            }
+            for (int i = 0; i < listToGrow[0].Count(); i++)
+            {
+                newRow.Add(0);
+            }
+            listToGrow.Add(newRow);
+            listToGrow.Insert(0, newRow);
+
+
+            PrintMatrix(listToGrow);
+
+            return listToGrow;
+        }
+
         // Fjerner ledende og følgende nuller fra 2d-lister
         public List<List<int>> TrimList(List<List<int>> listToTrim)
         {
 
             List<List<int>> croppedList = new List<List<int>>();
-            int firstIndex = listToTrim[0].Count() -1;
+            int firstIndex = listToTrim[0].Count() - 1;
             int lastIndex = 0;
             foreach (var list in listToTrim)
             {
@@ -58,30 +85,37 @@ namespace csharp_codewars2.Classes
                     lastIndex = list.LastIndexOf(1);
                 }
 
-        }
-        Console.WriteLine(firstIndex);
-        Console.WriteLine(lastIndex);
-        
-        foreach (var row in listToTrim)
-        {
-            croppedList.Add(row.GetRange(firstIndex, (lastIndex + 1) - firstIndex));
-        }
-
-
-
-
-        string showints = "";
-        foreach (var item in croppedList)
-        {
-            foreach (var cell in item)
-            {
-                showints += cell;
             }
-            showints += "\n";
+            Console.WriteLine(firstIndex);
+            Console.WriteLine(lastIndex);
+
+            foreach (var row in listToTrim)
+            {
+                croppedList.Add(row.GetRange(firstIndex, (lastIndex + 1) - firstIndex));
+            }
+
+
+            PrintMatrix(croppedList);
+
+        
+            return croppedList;
         }
+
+        private void PrintMatrix(List<List<int>> listOfLists)
+        {
+
+            string showints = "";
+            foreach (var item in listOfLists)
+            {
+                foreach (var cell in item)
+                {
+                    showints += cell;
+                }
+                showints += "\n";
+            }
 
             Console.WriteLine(showints);
-            return croppedList;
+            
         }
 
     }

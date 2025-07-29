@@ -25,6 +25,8 @@ class Program
         gameOfLife.TrimList(ints2);
         gameOfLife.TrimList(ints3);
 
+        gameOfLife.ExpandList(ints3);
+
         
 
     }
