@@ -16,7 +16,7 @@ namespace csharp_codewars2.Classes
 
         public int[,] ConwayLife(int[,] cellArray, int generation)
         {
-
+            // Thread.Sleep(500);
             int count = 0;
 
             List<List<int>> cells = Enumerable.Range(0, cellArray.GetLength(0))
@@ -24,23 +24,12 @@ namespace csharp_codewars2.Classes
                     .Select(col => cellArray[row, col]).ToList())
                     .ToList();
 
-            for (int row = 0; row < cells.Count; row++)
+            for (int row = 0; row < cells.Count(); row++)
             {
 
             }
 
-            string showMatrix = "";
-            foreach (var item in cells)
-            {
-                foreach (var cell in item)
-                {
-                    showMatrix += " " + cell;
-                }
-                showMatrix += "\n";
-            }
-
-            Console.WriteLine(showMatrix);
-
+            PrintMatrix(cellArray);
             return cellArray;
         }
 
@@ -97,7 +86,7 @@ namespace csharp_codewars2.Classes
 
             PrintMatrix(croppedList);
 
-        
+
             return croppedList;
         }
 
@@ -109,13 +98,30 @@ namespace csharp_codewars2.Classes
             {
                 foreach (var cell in item)
                 {
-                    showints += cell;
+                    showints += " " + cell;
                 }
                 showints += "\n";
             }
 
             Console.WriteLine(showints);
+
+        }
+
+        private void PrintMatrix(int[,] arrayToPrint)
+        {
             
+            string showMatrix = "";
+            for (int i = 0; i < arrayToPrint.GetLength(0); i++)
+            {
+                for (int x = 0; x < arrayToPrint.GetLength(1); x++)
+                {
+                    showMatrix += " " + arrayToPrint[i, x];
+                }
+                showMatrix += "\n";
+                
+            }
+
+            Console.WriteLine(showMatrix);
         }
 
     }
