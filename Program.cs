@@ -35,12 +35,7 @@ class Program
 
         int[,] empty = { { } };
 
-        gameOfLife.TrimList(startingMatrix);
-
-        startingMatrix = gameOfLife.ExpandList(startingMatrix);
-
-        gameOfLife.TrimList(startingMatrix);
-        
+        gameOfLife.ConwayLife(startingArray, 2);
 
     }
 }

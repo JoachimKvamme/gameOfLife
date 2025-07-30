@@ -37,22 +37,19 @@ namespace csharp_codewars2.Classes
 
             while (generationsRun <= generation && !isDead(cells))
             {
-                cells = TrimList(cells);
                 cells = runGeneration(cells);
-                cells = ExpandList(cells);
-                Thread.Sleep(1000);
                 generationsRun += 1;
-                Console.Clear();
 
             }
 
-
-            PrintMatrix(cellArray);
+            PrintMatrix(TrimList(cells));
             return cellArray;
         }
 
         List<List<int>> runGeneration(List<List<int>> cells)
         {
+
+            cells = ExpandList(cells);
 
             List<List<int>> originalCells = cells;
             int count = 0;
@@ -72,18 +69,18 @@ namespace csharp_codewars2.Classes
                             if (originalCells[localRow][localCell] == 1)
                             {
                                 count += 1;
-                                Console.WriteLine("count: " + count);
+                                // Console.WriteLine("count: " + count);
                             }
                         }
                     }
 
-                    if (originalCells[row][col] == 1 && count > 4)
+                    if (originalCells[row][col] == 1 && count >= 4)
                     {
                         cells[row][col] = 0;
                         Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " dør av overbefolkning.");
                     }
 
-                    if (originalCells[row][col] == 1 && count > 2 && count <= 4)
+                    if (originalCells[row][col] == 1 && count > 2 && count < 4)
                     {
                         Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " lever videre");
                     }
@@ -128,7 +125,7 @@ namespace csharp_codewars2.Classes
                 listToGrow[listToGrow.Count - 1].Add(0);
             }
 
-
+            PrintMatrix(listToGrow);
             return listToGrow;
         }
 
@@ -166,7 +163,14 @@ namespace csharp_codewars2.Classes
 
             Console.WriteLine("Første kolonne: " + firstColIndex + "\nAndre kolonne: " + lastColIndex);
 
-            
+            listToTrim = listToTrim[firstRow..(lastRow + 1)];
+
+            for (int i = 0; i < listToTrim.Count(); i++)
+            {
+                listToTrim[i] = listToTrim[i][firstColIndex..(lastColIndex + 1)];
+            }
+
+            PrintMatrix(listToTrim);
 
             return listToTrim;
         }
