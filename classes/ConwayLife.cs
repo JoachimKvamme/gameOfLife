@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,8 @@ namespace csharp_codewars2.Classes
 {
     public class ConwayLifeKata
     {
+
+
 
         public int[,] matrix =
         {{1, 0, 0, 0},
@@ -40,9 +43,9 @@ namespace csharp_codewars2.Classes
                 Thread.Sleep(1000);
                 generationsRun += 1;
                 Console.Clear();
-                
+
             }
-            
+
 
             PrintMatrix(cellArray);
             return cellArray;
@@ -50,7 +53,7 @@ namespace csharp_codewars2.Classes
 
         List<List<int>> runGeneration(List<List<int>> cells)
         {
-            
+
             List<List<int>> originalCells = cells;
             int count = 0;
 
@@ -106,22 +109,26 @@ namespace csharp_codewars2.Classes
 
         public List<List<int>> ExpandList(List<List<int>> listToGrow)
         {
-            List<int> newRow = new List<int>();
+            int rowLength = 0;
             foreach (var row in listToGrow)
             {
-                row.Add(0);
                 row.Insert(0, 0);
-
+                row.Add(0);
+                rowLength = row.Count();
             }
-            for (int i = 0; i < listToGrow[0].Count(); i++)
+
+            Console.WriteLine("rowLength: " + rowLength);
+            listToGrow.Add(new List<int>());
+            listToGrow.Insert(0, new List<int>());
+
+
+
+            for (int i = 0; i < rowLength; i++)
             {
-                newRow.Add(0);
+                listToGrow[0].Add(0);
+                listToGrow[listToGrow.Count - 1].Add(0);
             }
-            listToGrow.Add(newRow);
-            listToGrow.Insert(0, newRow);
 
-
-            PrintMatrix(listToGrow);
 
             return listToGrow;
         }
@@ -208,6 +215,18 @@ namespace csharp_codewars2.Classes
 
             Console.WriteLine(showMatrix);
         }
+
+        private void PrintList(List<int> listToPrint)
+        {
+            string showMatrix = "";
+            foreach (var item in listToPrint)
+            {
+                showMatrix += " " + item;
+            }
+
+            Console.WriteLine(showMatrix);
+        }
+
 
     }
 }

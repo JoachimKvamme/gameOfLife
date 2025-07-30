@@ -10,6 +10,12 @@ class Program
         Console.WriteLine("Hello, World!");
         ConwayLifeKata gameOfLife = new ConwayLifeKata();
 
+
+        List<List<int>> startingMatrix = [
+            [1,1,1,0,0,0,1,0],
+            [1,0,0,0,0,0,0,1],
+            [0,1,0,0,0,1,1,1]
+        ];
         List<List<int>> ints =
         [[0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
         [0, 1, 0, 0, 1, 1, 0, 0, 0, 0]];
@@ -21,12 +27,13 @@ class Program
         [1, 0, 0, 0, 1, 1, 0, 0, 0, 0]];
 
         int[,] empty = { { } };
-        Console.WriteLine(gameOfLife.ConwayLife(gameOfLife.matrix, 7));
-        Console.WriteLine(gameOfLife.ConwayLife(new int[,] {
-            {1,1,1,0,0,0,1,0},
-            {1,0,0,0,0,0,0,1},
-            {0,1,0,0,0,1,1,1}
-        }, 16));
+
+        for (int i = 0; i < 4; i++)
+        {
+
+            startingMatrix = gameOfLife.ExpandList(startingMatrix);
+            
+        }
 
         
 
