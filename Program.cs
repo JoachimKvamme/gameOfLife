@@ -1,4 +1,5 @@
 ﻿using csharp_codewars2.Classes;
+using System.Dynamic;
 using System.Linq;
 
 namespace csharp_codewars2;
@@ -11,6 +12,12 @@ class Program
         ConwayLifeKata gameOfLife = new ConwayLifeKata();
 
 
+
+        int[,] startingArray = {
+            {1,1,1,0,0,0,1,0},
+            {1,0,0,0,0,0,0,1},
+            {0,1,0,0,0,1,1,1}
+        };
         List<List<int>> startingMatrix = [
             [1,1,1,0,0,0,1,0],
             [1,0,0,0,0,0,0,1],
@@ -28,13 +35,11 @@ class Program
 
         int[,] empty = { { } };
 
-        for (int i = 0; i < 4; i++)
-        {
+        gameOfLife.TrimList(startingMatrix);
 
-            startingMatrix = gameOfLife.ExpandList(startingMatrix);
-            
-        }
+        startingMatrix = gameOfLife.ExpandList(startingMatrix);
 
+        gameOfLife.TrimList(startingMatrix);
         
 
     }

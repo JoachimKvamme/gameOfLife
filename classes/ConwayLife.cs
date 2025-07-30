@@ -83,12 +83,12 @@ namespace csharp_codewars2.Classes
                         Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " dør av overbefolkning.");
                     }
 
-                    if (originalCells[row][col] == 1 && count > 1 && count <= 4)
+                    if (originalCells[row][col] == 1 && count > 2 && count <= 4)
                     {
                         Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " lever videre");
                     }
 
-                    if (originalCells[row][col] == 1 && (count == 1 || count == 0))
+                    if (originalCells[row][col] == 1 && (count == 1 || count == 0 || count == 2))
                     {
                         cells[row][col] = 0;
                         Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " dør av underbefolkning");
@@ -117,7 +117,6 @@ namespace csharp_codewars2.Classes
                 rowLength = row.Count();
             }
 
-            Console.WriteLine("rowLength: " + rowLength);
             listToGrow.Add(new List<int>());
             listToGrow.Insert(0, new List<int>());
 
@@ -136,41 +135,40 @@ namespace csharp_codewars2.Classes
         // Fjerner ledende og følgende nuller fra 2d-lister
         public List<List<int>> TrimList(List<List<int>> listToTrim)
         {
+            List<int> firstCol = new List<int>();
+            List<int> lastCol = new List<int>();
 
-            List<List<int>> croppedList = new List<List<int>>();
-            int firstIndex = listToTrim[0].Count() - 1;
-            int lastIndex = 0;
-            foreach (var list in listToTrim)
+
+            List<int> row = new List<int>();
+
+            for (int i = 0; i < listToTrim.Count(); i++)
             {
-
-                if (list.IndexOf(1) < firstIndex)
+                if (listToTrim[i].Any(x => x == 1))
                 {
-                    firstIndex = list.FirstOrDefault(1);
+                    row.Add(i);
                 }
-                if (list.LastIndexOf(1) > lastIndex)
-                {
-                    lastIndex = list.LastOrDefault(1);
-                }
-
-            }
-            Console.WriteLine(firstIndex);
-            Console.WriteLine(lastIndex);
-
-            foreach (var row in listToTrim)
-            {
-                if (firstIndex == -1)
-                {
-                    croppedList.Add(row.GetRange(firstIndex + 1, (lastIndex + 1) - firstIndex));
-                    continue;
-                }
-                croppedList.Add(row.GetRange(firstIndex, (lastIndex + 1) - firstIndex));
             }
 
+            foreach (var item in listToTrim)
+            {
+                firstCol.Add(item.IndexOf(1));
+                lastCol.Add(item.LastIndexOf(1));
+            }
 
-            PrintMatrix(croppedList);
+            int firstRow = row.Where(x => x >= 0).Min();
+            int lastRow = row.Where(x => x >= 0).Max();
+
+            Console.WriteLine("Første rad: " + firstRow + "\nAndre rad: " + lastRow);
 
 
-            return croppedList;
+            int firstColIndex = firstCol.Where(x => x >= 0).Min();
+            int lastColIndex = lastCol.Where(x => x >= 0).Max();
+
+            Console.WriteLine("Første kolonne: " + firstColIndex + "\nAndre kolonne: " + lastColIndex);
+
+            
+
+            return listToTrim;
         }
 
         private void PrintMatrix(List<List<int>> listOfLists)
