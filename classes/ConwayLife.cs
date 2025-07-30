@@ -17,15 +17,19 @@ namespace csharp_codewars2.Classes
         {0, 1, 0, 0},
         {0, 0, 0, 0,} };
 
-        public int[,] ConwayLife(int[,] cellArray, int generation)
+        public int[,] ConwayLife(int[,] cellArray, int cycles)
         {
             // Thread.Sleep(500);
-            int generationsRun = 0;
+            int cyclesRun = 0;
+
 
             List<List<int>> cells = Enumerable.Range(0, cellArray.GetLength(0))
                     .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
                     .Select(col => cellArray[row, col]).ToList())
                     .ToList();
+
+
+            PrintMatrix(runGeneration(cells));
 
             if (isDead(cells))
             {
@@ -33,75 +37,63 @@ namespace csharp_codewars2.Classes
                 return empty;
             }
 
+            // løkker gjennom 2d-listen
+
+            
 
 
-            while (generationsRun <= generation && !isDead(cells))
-            {
-                cells = runGeneration(cells);
-                generationsRun += 1;
-
-            }
-
-            PrintMatrix(TrimList(cells));
             return cellArray;
         }
 
-        List<List<int>> runGeneration(List<List<int>> cells)
+
+        public List<List<int>> runGeneration(List<List<int>> cells)
         {
-
-            cells = ExpandList(cells);
-
-            List<List<int>> originalCells = cells;
             int count = 0;
 
-            // Løkker gjennom først radene, deretter kolonnene i den todimensjonale listen.
+            cells = ExpandList(cells);
+            List<List<int>> originalCells = new List<List<int>>(cells);
+
+
             for (int row = 1; row < cells.Count() - 1; row++)
             {
                 for (int col = 1; col < cells[0].Count() - 1; col++)
                 {
-                    // Løkker gjennom omlandet til den enkelte cellen.
-
+                    // teller 
                     for (int localRow = row - 1; localRow < row + 2; localRow++)
                     {
-                        for (int localCell = col - 1; localCell < col + 2; localCell++)
+                        for (int localCol = col - 1; localCol < col + 2; localCol++)
                         {
-                            /* Console.WriteLine("Løkken er på: [" + localRow + "] [" + localCell + "] og verdien er: " + cells[localRow][localCell]); */
-                            if (originalCells[localRow][localCell] == 1)
+                            if (cells[localRow][localCol] == 1)
                             {
                                 count += 1;
-                                // Console.WriteLine("count: " + count);
                             }
                         }
                     }
 
-                    if (originalCells[row][col] == 1 && count >= 4)
+                    if (count < 3 && cells[row][col] == 1)
                     {
-                        cells[row][col] = 0;
-                        Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " dør av overbefolkning.");
+                        Console.WriteLine("Cellen på cells[" + row + "][" + col + "] dør av underbefolkning.");
+                        
+                    }
+                    if (count > 4 && cells[row][col] == 1)
+                    {
+                        Console.WriteLine("Cellen på cells[" + row + "][" + col + "] dør av overbefolkning.");
+                        
+                    }
+                    if (count == 3 && cells[row][col] == 0)
+                    {
+                        Console.WriteLine("Cellen på cells[" + row + "][" + col + "] blir født.");
+                    
                     }
 
-                    if (originalCells[row][col] == 1 && count > 2 && count < 4)
-                    {
-                        Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " lever videre");
-                    }
+                    Console.WriteLine("Området rundt: cells[" + row + "][" + col + "]. Området cells[" + (row - 1) + "]" + "[" + (col - 1) + "]" + "til og med cells[" + (row + 1) + "]" + "[" + (col + 1) + "] inneholder " + count + " levende celler");
 
-                    if (originalCells[row][col] == 1 && (count == 1 || count == 0 || count == 2))
-                    {
-                        cells[row][col] = 0;
-                        Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " dør av underbefolkning");
-                    }
-
-                    if (originalCells[row][col] == 0 && count == 3)
-                    {
-                        cells[row][col] = 1;
-                        Console.WriteLine("Cellen på" + "[" + row + "]" + "[" + count + "]" + " blir født.");
-                    }
                     count = 0;
-
                 }
             }
-            PrintMatrix(cells);
+
             return cells;
+            
         }
 
         public List<List<int>> ExpandList(List<List<int>> listToGrow)
