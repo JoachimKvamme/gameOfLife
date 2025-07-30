@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace csharp_codewars2.Classes
@@ -27,6 +29,10 @@ namespace csharp_codewars2.Classes
                     .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
                     .Select(col => cellArray[row, col]).ToList())
                     .ToList();
+            List<List<int>> newCells = Enumerable.Range(0, cellArray.GetLength(0))
+                    .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
+                    .Select(col => cellArray[row, col]).ToList())
+                    .ToList();
 
 
             PrintMatrix(runGeneration(cells));
@@ -39,7 +45,7 @@ namespace csharp_codewars2.Classes
 
             // løkker gjennom 2d-listen
 
-            
+
 
 
             return cellArray;
@@ -51,7 +57,10 @@ namespace csharp_codewars2.Classes
             int count = 0;
 
             cells = ExpandList(cells);
-            List<List<int>> originalCells = new List<List<int>>(cells);
+
+            List<List<int>> newCells = DeepCopy(cells);
+
+
 
 
             for (int row = 1; row < cells.Count() - 1; row++)
@@ -73,17 +82,21 @@ namespace csharp_codewars2.Classes
                     if (count < 3 && cells[row][col] == 1)
                     {
                         Console.WriteLine("Cellen på cells[" + row + "][" + col + "] dør av underbefolkning.");
-                        
+                        newCells[row][col] = 0;
+
                     }
-                    if (count > 4 && cells[row][col] == 1)
+                    else if (count > 4 && cells[row][col] == 1)
                     {
                         Console.WriteLine("Cellen på cells[" + row + "][" + col + "] dør av overbefolkning.");
-                        
+
+                        newCells[row][col] = 0;
+
                     }
-                    if (count == 3 && cells[row][col] == 0)
+                    else if (count == 3 && cells[row][col] == 0)
                     {
                         Console.WriteLine("Cellen på cells[" + row + "][" + col + "] blir født.");
-                    
+
+                        newCells[row][col] = 1;
                     }
 
                     Console.WriteLine("Området rundt: cells[" + row + "][" + col + "]. Området cells[" + (row - 1) + "]" + "[" + (col - 1) + "]" + "til og med cells[" + (row + 1) + "]" + "[" + (col + 1) + "] inneholder " + count + " levende celler");
@@ -92,8 +105,8 @@ namespace csharp_codewars2.Classes
                 }
             }
 
-            return cells;
-            
+            return newCells;
+
         }
 
         public List<List<int>> ExpandList(List<List<int>> listToGrow)
@@ -220,6 +233,18 @@ namespace csharp_codewars2.Classes
 
             Console.WriteLine(showMatrix);
         }
+        
+
+        public static List<List<int>> DeepCopy(List<List<int>> original)
+    {
+        var copy = new List<List<int>>();
+        foreach (var innerList in original)
+        {
+            var innerCopy = new List<int>(innerList); // Creates a new list with the same elements
+            copy.Add(innerCopy);
+        }
+        return copy;
+    }
 
 
     }
