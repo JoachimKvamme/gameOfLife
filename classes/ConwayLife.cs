@@ -35,7 +35,18 @@ namespace csharp_codewars2.Classes
                     .ToList();
 
 
-            PrintMatrix(runGeneration(cells));
+            while (cyclesRun < cycles && !isDead(cells))
+            {
+
+
+
+                PrintMatrix(runGeneration(cells));
+
+                cyclesRun += 1;
+
+                Console.Clear();
+                
+            }
 
             if (isDead(cells))
             {
@@ -99,12 +110,12 @@ namespace csharp_codewars2.Classes
                         newCells[row][col] = 1;
                     }
 
-                    Console.WriteLine("Området rundt: cells[" + row + "][" + col + "]. Området cells[" + (row - 1) + "]" + "[" + (col - 1) + "]" + "til og med cells[" + (row + 1) + "]" + "[" + (col + 1) + "] inneholder " + count + " levende celler");
+                    /* Console.WriteLine("Området rundt: cells[" + row + "][" + col + "]. Området cells[" + (row - 1) + "]" + "[" + (col - 1) + "]" + "til og med cells[" + (row + 1) + "]" + "[" + (col + 1) + "] inneholder " + count + " levende celler"); */
 
                     count = 0;
                 }
             }
-
+            
             return newCells;
 
         }
@@ -130,7 +141,7 @@ namespace csharp_codewars2.Classes
                 listToGrow[listToGrow.Count - 1].Add(0);
             }
 
-            PrintMatrix(listToGrow);
+            /* PrintMatrix(listToGrow); */
             return listToGrow;
         }
 
@@ -160,14 +171,14 @@ namespace csharp_codewars2.Classes
             int firstRow = row.Where(x => x >= 0).Min();
             int lastRow = row.Where(x => x >= 0).Max();
 
-            Console.WriteLine("Første rad: " + firstRow + "\nAndre rad: " + lastRow);
+            /* Console.WriteLine("Første rad: " + firstRow + "\nAndre rad: " + lastRow); */
 
 
             int firstColIndex = firstCol.Where(x => x >= 0).Min();
             int lastColIndex = lastCol.Where(x => x >= 0).Max();
 
-            Console.WriteLine("Første kolonne: " + firstColIndex + "\nAndre kolonne: " + lastColIndex);
-
+/*             Console.WriteLine("Første kolonne: " + firstColIndex + "\nAndre kolonne: " + lastColIndex);
+ */
             listToTrim = listToTrim[firstRow..(lastRow + 1)];
 
             for (int i = 0; i < listToTrim.Count(); i++)
@@ -175,7 +186,7 @@ namespace csharp_codewars2.Classes
                 listToTrim[i] = listToTrim[i][firstColIndex..(lastColIndex + 1)];
             }
 
-            PrintMatrix(listToTrim);
+            /* PrintMatrix(listToTrim); */
 
             return listToTrim;
         }

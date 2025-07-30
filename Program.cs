@@ -35,7 +35,7 @@ class Program
 
         int[,] empty = { { } };
 
-        gameOfLife.ConwayLife(startingArray, 2);
+        gameOfLife.ConwayLife(startingArray, 16);
 
     }
 }
