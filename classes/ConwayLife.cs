@@ -35,17 +35,27 @@ namespace csharp_codewars2.Classes
                     .ToList();
 
 
+            Console.WriteLine("Utgangsposisjon: ");
+            PrintMatrix(cells);
             while (cyclesRun < cycles && !isDead(cells))
             {
 
+                
+                cells = DeepCopy(runGeneration(cells));
 
-
-                PrintMatrix(runGeneration(cells));
+                if (isDead(cells))
+                {
+                    Console.WriteLine("Alle cellene er døde");
+                    return new int[,] { { } };
+                }
+                Console.WriteLine("Generasjon #" + cyclesRun);
+                PrintMatrix(cells);
 
                 cyclesRun += 1;
-
-                Console.Clear();
+                Thread.Sleep(200);
                 
+
+
             }
 
             if (isDead(cells))
@@ -154,13 +164,19 @@ namespace csharp_codewars2.Classes
 
             List<int> row = new List<int>();
 
-            for (int i = 0; i < listToTrim.Count(); i++)
+            if (isDead(listToTrim))
             {
-                if (listToTrim[i].Any(x => x == 1))
-                {
-                    row.Add(i);
-                }
+                Console.WriteLine("Kan ikke trimme listen. Det er kun døde celler igjen.");
+                return listToTrim;
             }
+
+            for (int i = 0; i < listToTrim.Count(); i++)
+                {
+                    if (listToTrim[i].Any(x => x == 1))
+                    {
+                        row.Add(i);
+                    }
+                }
 
             foreach (var item in listToTrim)
             {
