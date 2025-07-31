@@ -78,6 +78,7 @@ namespace csharp_codewars2.Classes
             int count = 0;
 
             cells = ExpandList(cells);
+            cells = ExpandList(cells);
 
             List<List<int>> newCells = DeepCopy(cells);
 
@@ -125,6 +126,8 @@ namespace csharp_codewars2.Classes
                     count = 0;
                 }
             }
+
+            newCells = DeepCopy(TrimList(newCells));
             
             return newCells;
 
@@ -207,7 +210,7 @@ namespace csharp_codewars2.Classes
             return listToTrim;
         }
 
-        private void PrintMatrix(List<List<int>> listOfLists)
+        public void PrintMatrix(List<List<int>> listOfLists)
         {
 
             string showints = "";

@@ -18,6 +18,11 @@ class Program
             {1,0,0,0,0,0,0,1},
             {0,1,0,0,0,1,1,1}
         };
+        int[,] startingArray2 = {
+            {0,0,0,1,1,1,0,0},
+            {0,0,0,1,0,0,0,0},
+            {0,0,0,0,1,0,0,0}
+        };
 
         int[,] r_pentimo = new int[,] {
             {0,0,0,1,1,0,0,0},
@@ -41,7 +46,7 @@ class Program
 
         int[,] empty = { { } };
 
-        gameOfLife.ConwayLife(r_pentimo, 23);
+        gameOfLife.ConwayLife(startingArray, 16);
 
 
     }
