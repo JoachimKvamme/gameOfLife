@@ -40,6 +40,9 @@ namespace csharp_codewars2.Classes
             while (cyclesRun < cycles && !isDead(cells))
             {
 
+                Console.Clear();
+                Console.WriteLine("\x1b[3J");
+
                 
                 cells = DeepCopy(runGeneration(cells));
 
@@ -51,9 +54,11 @@ namespace csharp_codewars2.Classes
                 Console.WriteLine("Generasjon #" + cyclesRun);
                 PrintMatrix(cells);
 
-                cyclesRun += 1;
-                
 
+
+                cyclesRun += 1;
+
+                Thread.Sleep(300);
 
             }
 

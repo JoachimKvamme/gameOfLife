@@ -46,7 +46,8 @@ class Program
 
         int[,] empty = { { } };
 
-        gameOfLife.PrintMatrix(gameOfLife.GetGeneration(startingArray, 16));
+        gameOfLife.GetGeneration(startingArray, 16);
+        gameOfLife.GetGeneration(r_pentimo, 22);
         
 
 
