@@ -9,7 +9,7 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!");
-        ConwayLifeKata gameOfLife = new ConwayLifeKata();
+        ConwayLife gameOfLife = new ConwayLife();
 
 
 
@@ -46,7 +46,8 @@ class Program
 
         int[,] empty = { { } };
 
-        gameOfLife.ConwayLife(startingArray, 16);
+        gameOfLife.PrintMatrix(gameOfLife.GetGeneration(startingArray, 16));
+        
 
 
     }

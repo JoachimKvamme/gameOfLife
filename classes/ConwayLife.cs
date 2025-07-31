@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace csharp_codewars2.Classes
 {
-    public class ConwayLifeKata
+    public class ConwayLife
     {
 
 
@@ -19,7 +19,7 @@ namespace csharp_codewars2.Classes
         {0, 1, 0, 0},
         {0, 0, 0, 0,} };
 
-        public int[,] ConwayLife(int[,] cellArray, int cycles)
+        public int[,] GetGeneration(int[,] cellArray, int cycles)
         {
             // Thread.Sleep(500);
             int cyclesRun = 0;
@@ -52,7 +52,6 @@ namespace csharp_codewars2.Classes
                 PrintMatrix(cells);
 
                 cyclesRun += 1;
-                Thread.Sleep(200);
                 
 
 
@@ -66,10 +65,19 @@ namespace csharp_codewars2.Classes
 
             // løkker gjennom 2d-listen
 
+            int rows = cells.Count();
+            int cols = cells[0].Count();
 
+            int[,] finalState = new int[rows, cols];
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    finalState[i, j] = cells[i][j];
+                }
+            }
 
-
-            return cellArray;
+            return finalState;
         }
 
 
@@ -236,7 +244,7 @@ namespace csharp_codewars2.Classes
             }
             return false;
         }
-        private void PrintMatrix(int[,] arrayToPrint)
+        public void PrintMatrix(int[,] arrayToPrint)
         {
 
             string showMatrix = "";
