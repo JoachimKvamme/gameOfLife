@@ -22,7 +22,7 @@ namespace csharp_codewars2.Classes
         public int[,] GetGeneration(int[,] cellArray, int cycles)
         {
             // Thread.Sleep(500);
-            int cyclesRun = 0;
+            int cyclesRun = 1;
 
 
             List<List<int>> cells = Enumerable.Range(0, cellArray.GetLength(0))
@@ -116,20 +116,20 @@ namespace csharp_codewars2.Classes
 
                     if (count < 3 && cells[row][col] == 1)
                     {
-                        Console.WriteLine("Cellen på cells[" + row + "][" + col + "] dør av underbefolkning.");
+                        /* Console.WriteLine("Cellen på cells[" + row + "][" + col + "] dør av underbefolkning."); */
                         newCells[row][col] = 0;
 
                     }
                     else if (count > 4 && cells[row][col] == 1)
                     {
-                        Console.WriteLine("Cellen på cells[" + row + "][" + col + "] dør av overbefolkning.");
+                        /* Console.WriteLine("Cellen på cells[" + row + "][" + col + "] dør av overbefolkning."); */
 
                         newCells[row][col] = 0;
 
                     }
                     else if (count == 3 && cells[row][col] == 0)
                     {
-                        Console.WriteLine("Cellen på cells[" + row + "][" + col + "] blir født.");
+                        /* Console.WriteLine("Cellen på cells[" + row + "][" + col + "] blir født."); */
 
                         newCells[row][col] = 1;
                     }
