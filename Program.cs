@@ -42,7 +42,7 @@ class Program
         int[,] empty = { { } };
 
         gameOfLife.GetGeneration(startingArray, 16);
-        gameOfLife.GetGeneration(r_pentimo, 21);
+        gameOfLife.GetGeneration(r_pentimo, 22);
         
 
 
