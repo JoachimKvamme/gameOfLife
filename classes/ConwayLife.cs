@@ -13,12 +13,28 @@ namespace csharp_codewars2.Classes
 
 
 
-        public int[,] matrix =
-        {{1, 0, 0, 0},
-        {0, 1, 1, 0},
-        {0, 1, 0, 0},
-        {0, 0, 0, 0,} };
+        public int[,] cellArray;
+        public int cycles;
+        public List<List<int>> cells;
+        public List<List<int>> newCells;
 
+
+        public ConwayLife(int[,] _cellArray, int _cycles)
+        {
+            cellArray = _cellArray;
+            cycles = _cycles;
+            
+            cells = Enumerable.Range(0, cellArray.GetLength(0))
+                    .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
+                    .Select(col => cellArray[row, col]).ToList())
+                    .ToList();
+            newCells = Enumerable.Range(0, cellArray.GetLength(0))
+                    .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
+                    .Select(col => cellArray[row, col]).ToList())
+                    .ToList();
+        }
+
+        
         public int[,] GetGeneration(int[,] cellArray, int cycles)
         {
             // Thread.Sleep(500);
@@ -43,7 +59,7 @@ namespace csharp_codewars2.Classes
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
 
-                
+
                 cells = DeepCopy(runGeneration(cells));
 
                 if (isDead(cells))
