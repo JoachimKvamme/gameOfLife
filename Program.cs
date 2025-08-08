@@ -9,7 +9,6 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!");
-        ConwayLife gameOfLife = new ConwayLife();
 
 
 
@@ -17,6 +16,11 @@ class Program
             {1,1,1,0,0,0,1,0},
             {1,0,0,0,0,0,0,1},
             {0,1,0,0,0,1,1,1}
+        };
+        int[,] deadArray = {
+            {0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0}
         };
 
         int[,] r_pentimo = new int[,] {
@@ -63,11 +67,11 @@ class Program
 
         int[,] empty = { { } };
 
-        /* gameOfLife.GetGeneration(startingArray, 16);
 
-        gameOfLife.GetGeneration(r_pentimo, 22); 
-        gameOfLife.GetGeneration(beacon, 20); */
-        gameOfLife.GetGeneration(lighWeightSpaceship, 150);
+        ConwayLife gameOfLife = new ConwayLife(deadArray, 10);
+        gameOfLife.GetGeneration();
+
+        
 
 
     }

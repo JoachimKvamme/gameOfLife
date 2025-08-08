@@ -35,25 +35,21 @@ namespace csharp_codewars2.Classes
         }
 
         
-        public int[,] GetGeneration(int[,] cellArray, int cycles)
+        public int[,] GetGeneration()
         {
             // Thread.Sleep(500);
-            int cyclesRun = 1;
-
-
-            List<List<int>> cells = Enumerable.Range(0, cellArray.GetLength(0))
-                    .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
-                    .Select(col => cellArray[row, col]).ToList())
-                    .ToList();
-            List<List<int>> newCells = Enumerable.Range(0, cellArray.GetLength(0))
-                    .Select(row => Enumerable.Range(0, cellArray.GetLength(1))
-                    .Select(col => cellArray[row, col]).ToList())
-                    .ToList();
+            int cyclesRun = 0;
 
 
             Console.WriteLine("Utgangsposisjon: ");
             PrintMatrix(cells);
-            while (cyclesRun < cycles && !isDead(cells))
+
+            if (isDead())
+            {
+                Console.WriteLine("Alle cellene er døde");
+            }
+            
+            while (cyclesRun < cycles && !isDead())
             {
 
                 Console.Clear();
@@ -62,7 +58,7 @@ namespace csharp_codewars2.Classes
 
                 cells = DeepCopy(runGeneration(cells));
 
-                if (isDead(cells))
+                if (isDead())
                 {
                     Console.WriteLine("Alle cellene er døde");
                     return new int[,] { { } };
@@ -78,7 +74,7 @@ namespace csharp_codewars2.Classes
 
             }
 
-            if (isDead(cells))
+            if (isDead())
             {
                 int[,] empty = { { } };
                 return empty;
@@ -196,7 +192,7 @@ namespace csharp_codewars2.Classes
 
             List<int> row = new List<int>();
 
-            if (isDead(listToTrim))
+            if (isDead())
             {
                 Console.WriteLine("Kan ikke trimme listen. Det er kun døde celler igjen.");
                 return listToTrim;
@@ -274,7 +270,7 @@ namespace csharp_codewars2.Classes
             Console.WriteLine(showMatrix);
         }
 
-        private bool isDead(List<List<int>> cells)
+        private bool isDead()
         {
 
             if (cells.All(x => x.All(y => y == 0)))
