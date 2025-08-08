@@ -58,7 +58,7 @@ namespace csharp_codewars2.Classes
 
                 cyclesRun += 1;
 
-                Thread.Sleep(300);
+                Thread.Sleep(100);
 
             }
 
