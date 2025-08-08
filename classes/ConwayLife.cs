@@ -240,15 +240,7 @@ namespace csharp_codewars2.Classes
 
         }
 
-        private bool isDead(List<List<int>> cells)
-        {
-
-            if (cells.All(x => x.All(y => y == 0)))
-            {
-                return true;
-            }
-            return false;
-        }
+        
         public void PrintMatrix(int[,] arrayToPrint)
         {
 
@@ -264,6 +256,16 @@ namespace csharp_codewars2.Classes
             }
 
             Console.WriteLine(showMatrix);
+        }
+
+        private bool isDead(List<List<int>> cells)
+        {
+
+            if (cells.All(x => x.All(y => y == 0)))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void PrintList(List<int> listToPrint)

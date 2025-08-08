@@ -63,11 +63,11 @@ class Program
 
         int[,] empty = { { } };
 
-        gameOfLife.GetGeneration(startingArray, 16);
+        /* gameOfLife.GetGeneration(startingArray, 16);
 
         gameOfLife.GetGeneration(r_pentimo, 22); 
-        gameOfLife.GetGeneration(beacon, 20);
-        /* gameOfLife.GetGeneration(lighWeightSpaceship, 150); */
+        gameOfLife.GetGeneration(beacon, 20); */
+        gameOfLife.GetGeneration(lighWeightSpaceship, 150);
 
 
     }
