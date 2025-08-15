@@ -48,7 +48,7 @@ namespace csharp_codewars2.Classes
             {
                 Console.WriteLine("Alle cellene er døde");
             }
-            
+
             while (cyclesRun < cycles && !isDead())
             {
 
@@ -70,7 +70,7 @@ namespace csharp_codewars2.Classes
 
                 cyclesRun += 1;
 
-                Thread.Sleep(100);
+                Thread.Sleep(300);
 
             }
 

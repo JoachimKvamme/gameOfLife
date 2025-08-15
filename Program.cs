@@ -68,7 +68,7 @@ class Program
         int[,] empty = { { } };
 
 
-        ConwayLife gameOfLife = new ConwayLife(deadArray, 10);
+        ConwayLife gameOfLife = new ConwayLife(r_pentimo, 300);
         gameOfLife.GetGeneration();
 
         
